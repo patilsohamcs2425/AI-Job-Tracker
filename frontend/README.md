@@ -1,21 +1,37 @@
-#  AI Job Tracker - Professional Dashboard
+AI Job Tracker - Professional Dashboard
+An intelligent job portal that utilizes AI Matching and Smart Tracking to manage career applications efficiently. Built with the Fastify & React stack.
 
-An intelligent job portal that utilizes **AI Matching** and **Smart Tracking** to manage career applications efficiently. Built with the **MERN-lite** stack (Fastify & React).
+Live Demo: https://ai-job-tracker-delta.vercel.app
 
-##  Requirements Fulfilled
-* **Job Feed**: Real-time developer roles fetched via Adzuna API.
-* **AI Matching**: Gemini-1.5-Flash provides custom match scores and logic.
-* **Smart Tracking**: Detects when you return to the app after applying and prompts for status.
-* **Persistence**: Automatically saves your "Applied" job history to LocalStorage.
-* **Career Coach**: Built-in AI sidebar for resume tips and interview help.
-* **Mobile Responsive**: Dashboard adapts for both Desktop and Mobile views.
+🏗️ Architecture & Logic
+System Design: The project follows a decoupled architecture where a React frontend communicates with a Fastify Node.js backend to ensure high performance and low latency.
 
-## 🛠️ Tech Stack
-* **Backend**: Node.js, Fastify.
-* **Frontend**: React.js, Lucide-React Icons.
-* **AI Engine**: Google Generative AI (Gemini).
+AI Matching Logic: We utilize the Gemini-1.5-Flash model for semantic analysis, comparing job descriptions with user skills to generate a match percentage.
 
-## 🚀 Setup Instructions
-1.  **Backend**: `cd backend`, `npm install`, then `node server.js`.
-2.  **Frontend**: `cd frontend`, `npm install`, then `npm start`.
-3.  **Env**: Ensure `.env` contains your Gemini and Adzuna keys.
+Efficiency: Parallel processing using Promise.all() is implemented to handle multiple job matching requests simultaneously, reducing processing time significantly.
+
+🧠 Critical Thinking & Design Decisions
+Application Tracker: We implemented a Popup Flow using a window.focus event listener. This detects when a user returns to the dashboard after clicking an external application link, triggering a status update prompt.
+
+Persistence Strategy: LocalStorage was chosen for data persistence to ensure user application history is saved instantly without the overhead of complex database management for this version.
+
+📈 Scalability & Tradeoffs
+Scaling to 10k Users: For high-scale traffic, we would transition to a Redis-based caching system for job scores and a PostgreSQL database for persistent cross-device user data.
+
+Tradeoffs: Given the 24-hour development window, we prioritized core AI functionality and UX flow over a multi-page authentication system to deliver maximum value to the recruiter.
+
+🛠️ Tech Stack
+Backend: Node.js, Fastify.
+
+Frontend: React.js, Lucide-React.
+
+AI Engine: Google Generative AI (Gemini).
+
+🚀 Setup Instructions
+Prerequisites: Install Node.js and NPM.
+
+Backend: Navigate to /backend, run npm install, and start with node server.js.
+
+Frontend: Navigate to /frontend, run npm install, and start with npm start.
+
+Environment Variables: Create a .env in the backend with GEMINI_API_KEY, ADZUNA_APP_ID, and ADZUNA_APP_KEY.
