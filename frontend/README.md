@@ -35,3 +35,5 @@ Backend: Navigate to /backend, run npm install, and start with node server.js.
 Frontend: Navigate to /frontend, run npm install, and start with npm start.
 
 Environment Variables: Create a .env in the backend with GEMINI_API_KEY, ADZUNA_APP_ID, and ADZUNA_APP_KEY.
+
+⚠️ Important Note: This project uses a free-tier hosting service (Render). Please allow 60 seconds for the AI backend to "wake up" during the first request.
