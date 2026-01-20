@@ -13,6 +13,9 @@ function App() {
   const [chatMsg, setChatMsg] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
 
+  // URL of your deployed backend on Render
+  const BACKEND_URL = 'https://ai-job-tracker-rvv0.onrender.com';
+
   // Save applications to LocalStorage
   useEffect(() => {
     localStorage.setItem('applied', JSON.stringify(appliedJobs));
@@ -37,10 +40,13 @@ function App() {
     if (!resume.trim()) return alert("Enter skills first!");
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/jobs', { resumeText: resume });
+      // Updated to use Live Render URL
+      const res = await axios.post(`${BACKEND_URL}/jobs`, { resumeText: resume });
       setJobs(res.data);
       setView('home');
-    } catch (err) { alert("Backend Offline!"); }
+    } catch (err) { 
+      alert("Backend is waking up or offline. Please wait 30-60 seconds and try again."); 
+    }
     setLoading(false);
   };
 
@@ -49,9 +55,10 @@ function App() {
     setChatMsg("");
     setChatHistory([...chatHistory, { role: 'user', text: msg }]);
     try {
-      const res = await axios.post('http://localhost:5000/chat', { message: msg });
+      // Updated to use Live Render URL
+      const res = await axios.post(`${BACKEND_URL}/chat`, { message: msg });
       setChatHistory(prev => [...prev, { role: 'ai', text: res.data.reply }]);
-    } catch (err) { alert("AI Coach Error"); }
+    } catch (err) { alert("AI Coach is temporarily unavailable."); }
   };
 
   return (
